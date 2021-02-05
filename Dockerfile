@@ -8,4 +8,6 @@ WORKDIR /sFlowToElastic
 COPY --from=sFlowBuild /sFlowToElastic .
 ENV ELASTIC_URI="http://elasticsearch:9200"
 ENV ELASTIC_INDEX_PREFIX="ba-sflow-"
-ENTRYPOINT ./sFlowToElasticCollector $ELASTIC_URI $ELASTIC_INDEX_PREFIX
+ENV ELASTIC_USER="elastic.user"
+ENV ELASTIC_PASS="elastic.pass"
+ENTRYPOINT ./sFlowToElasticCollector $ELASTIC_URI $ELASTIC_INDEX_PREFIX $ELASTIC_USER $ELASTIC_PASS
