@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "sFlowToElasticCollector": {
+      "commandName": "Project",
+      "commandLineArgs": "\"http://cp-docker1:9200\" \"ba-sflow-test-\""
+    }
+  }
+}

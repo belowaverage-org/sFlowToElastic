@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>BelowAverage</RootNamespace>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <Version>0.0.0.0</Version>
+    <Copyright>Dylan Bickerstaff; Below Average (C) 2021</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/krisdb2009/sFlowToElastic</RepositoryUrl>
+    <Company>Below Average</Company>
+    <Description>Captures sFlow data and forwards to an Elastic Search database.</Description>
+    <PackageTags>sFlow, Collector, Elastic, ElasticSearch, Search</PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetCoreServer" Version="5.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\sFlowLibrary\sFlowLibrary.csproj" />
+  </ItemGroup>
+
+</Project>
