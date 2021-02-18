@@ -1,6 +1,6 @@
 ﻿namespace BelowAverage.sFlow.Samples.Flow.Records.Extended
 {
-    public class SwitchData : Record
+    public class SwitchData : FlowRecord
     {
         public uint IncomingVLAN = 0;
         public uint IncomingPriority = 0;

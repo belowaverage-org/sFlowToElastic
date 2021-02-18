@@ -2,13 +2,13 @@
 {
     public class Sample
     {
-        public const uint StartIndex = 8;
-        public const uint HeaderLength = 16;
+        public const uint StartIndexBytes = 8;
+        public const uint HeaderLengthBytes = 16;
         public ushort Enterprise = 0;
         public SampleType Type = 0;
         public uint Length = 0;
         public uint Sequence = 0;
-        public byte SourceIDType = 0;
+        public SourceIDType SourceIDType = 0;
         public uint SourceIDIndex = 0;
         public Sample(byte[] buffer)
         {
@@ -18,8 +18,8 @@
             Length = buffer.ToUInt(4, 4);
             Sequence = buffer.ToUInt(8, 4);
             uint source = buffer.ToUInt(12, 4);
-            SourceIDType = (byte)((source & 0b11111111000000000000000000000000) >> 24);
-            SourceIDIndex = (source & 0b00000000111111111111111111111111);
+            SourceIDType = (SourceIDType)((source & 0b11111111000000000000000000000000) >> 24);
+            SourceIDIndex = source & 0b00000000111111111111111111111111;
         }
     }
     public enum SampleType : ushort
@@ -27,5 +27,11 @@
         Unknown = 0,
         Flow = 1,
         Counter = 2
+    }
+    public enum SourceIDType : byte
+    {
+        IfIndex = 0,
+        SMonVlanDataSource = 1,
+        EntPhysicalEntry = 2
     }
 }

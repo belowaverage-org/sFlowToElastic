@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BelowAverage.sFlow.Samples.Counter.Records
 {
-    class Record
+    class Generic
     {
     }
 }

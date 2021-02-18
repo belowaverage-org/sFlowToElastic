@@ -49,7 +49,7 @@ namespace BelowAverage
                     doc.Add("frame_out_interface_value", flowSample.OutputInterface.Value);
                     doc.Add("frame_out_interface_format", flowSample.OutputInterface.Format.ToString());
                     doc.Add("frame_out_interface_discard", flowSample.OutputInterface.DiscardReason.ToString());
-                    foreach (Record record in flowSample.Records)
+                    foreach (FlowRecord record in flowSample.Records)
                     {
                         if (record.Type == RecordType.RawPacketHeader)
                         {

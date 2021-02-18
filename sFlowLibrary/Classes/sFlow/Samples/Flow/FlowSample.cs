@@ -11,7 +11,7 @@ namespace BelowAverage.sFlow.Samples.Flow
         public uint DroppedPackets = 0;
         public sFlowInterface InputInterface = null;
         public sFlowInterface OutputInterface = null;
-        public Record[] Records = new Record[0];
+        public FlowRecord[] Records = new FlowRecord[0];
         public FlowSample(byte[] buffer) : base (buffer)
         {
             SamplingRate = buffer.ToUInt(16, 4);
@@ -20,12 +20,12 @@ namespace BelowAverage.sFlow.Samples.Flow
             InputInterface = buffer.ToUInt(28, 4).ToSflowInterface();
             OutputInterface = buffer.ToUInt(32, 4).ToSflowInterface();
             uint records = buffer.ToUInt(36, 4);
-            Records = new Record[records];
+            Records = new FlowRecord[records];
             uint recordStartIndex = 40;
             for (uint i = 0; i < Records.Length; i++)
             {
-                Record record = new Record(buffer.AsSpan((int)recordStartIndex, (int)Record.HeaderLength).ToArray());
-                int recordLength = (int)(record.Length + Record.HeaderLength);
+                FlowRecord record = new FlowRecord(buffer.AsSpan((int)recordStartIndex, (int)Record.HeaderLengthBytes).ToArray());
+                int recordLength = (int)(record.Length + Record.HeaderLengthBytes);
                 if(record.Type == RecordType.RawPacketHeader)
                 {
                     record = new RawPacketHeader(buffer.AsSpan((int)recordStartIndex, recordLength).ToArray());

@@ -3,7 +3,7 @@ using System;
 
 namespace BelowAverage.sFlow.Samples.Flow.Records
 {
-    public class RawPacketHeader : Record
+    public class RawPacketHeader : FlowRecord
     {
         public HeaderProtocol HeaderProtocol = 0;
         public uint FrameLength = 0;

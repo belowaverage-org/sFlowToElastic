@@ -1,5 +1,7 @@
 ﻿using BelowAverage.sFlow.Generic;
 using BelowAverage.sFlow.Samples;
+using BelowAverage.sFlow.Samples.Counter;
+using BelowAverage.sFlow.Samples.Flow;
 using System;
 
 namespace BelowAverage.sFlow
@@ -25,8 +27,8 @@ namespace BelowAverage.sFlow
             uint sampleIndex = 0;
             for (uint i = 0; i < sampleCount; i++)
             {
-                Sample sample = new Sample(UDPDatagramBuffer.AsSpan((int)(HeaderLength + sampleIndex), (int)Sample.HeaderLength).ToArray());
-                byte[] buffer = UDPDatagramBuffer.AsSpan((int)(HeaderLength + sampleIndex), (int)(sample.Length + Sample.StartIndex)).ToArray();
+                Sample sample = new Sample(UDPDatagramBuffer.AsSpan((int)(HeaderLength + sampleIndex), (int)Sample.HeaderLengthBytes).ToArray());
+                byte[] buffer = UDPDatagramBuffer.AsSpan((int)(HeaderLength + sampleIndex), (int)(sample.Length + Sample.StartIndexBytes)).ToArray();
                 if (sample.Type == SampleType.Flow)
                 {
                     Samples[i] = new FlowSample(buffer);
@@ -35,7 +37,7 @@ namespace BelowAverage.sFlow
                 {
                     Samples[i] = new CounterSample(buffer);
                 }
-                sampleIndex += sample.Length + Sample.StartIndex;
+                sampleIndex += sample.Length + Sample.StartIndexBytes;
             }
         }
     }

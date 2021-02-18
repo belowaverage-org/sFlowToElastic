@@ -1,15 +1,11 @@
 ﻿namespace BelowAverage.sFlow.Samples.Flow.Records
 {
-    public class Record
+    public class FlowRecord : Record
     {
-        public const uint HeaderLength = 8;
-        public RecordType Type = 0;
-        public uint Length = 0;
-        public Record(byte[] buffer)
+        public new RecordType Type = 0;
+        public FlowRecord(byte[] buffer) : base(buffer)
         {
-            uint type = buffer.ToUInt(0, 4);
-            Type = (RecordType)(type & 0b00000000000000000000111111111111);
-            Length = buffer.ToUInt(4, 4);
+            Type = (RecordType)base.Type;
         }
     }
     public enum RecordType : ushort
