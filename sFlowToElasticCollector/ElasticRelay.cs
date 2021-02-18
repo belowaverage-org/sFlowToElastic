@@ -44,8 +44,10 @@ namespace BelowAverage
                     doc.Add("sampling_rate", flowSample.SamplingRate);
                     doc.Add("sampling_pool", flowSample.SamplingPool);
                     doc.Add("dropped_packets", flowSample.DroppedPackets);
-                    doc.Add("frame_in_interface", flowSample.InputInterface);
-                    doc.Add("frame_out_interface", flowSample.OutputInterface);
+                    doc.Add("frame_in_interface_value", flowSample.InputInterface.Value);
+                    doc.Add("frame_out_interface_value", flowSample.OutputInterface.Value);
+                    doc.Add("frame_out_interface_format", flowSample.OutputInterface.Format.ToString());
+                    doc.Add("frame_out_interface_discard", flowSample.OutputInterface.DiscardReason.ToString());
                     foreach (Record record in flowSample.Records)
                     {
                         if (record.Type == RecordType.RawPacketHeader)
