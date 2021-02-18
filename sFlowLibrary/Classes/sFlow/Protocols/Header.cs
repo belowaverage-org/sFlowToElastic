@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Types.Protocols
+﻿namespace BelowAverage.sFlow.Protocols
 {
     public class Header { }
     public enum HeaderProtocol : uint

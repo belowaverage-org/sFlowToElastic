@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Types.Flow.Records
+﻿namespace BelowAverage.sFlow.Samples.Flow.Records
 {
     public class Record
     {

@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Types
+﻿namespace BelowAverage.sFlow.Generic
 {
     public class IPAddress {
         public AddressType Type = 0;

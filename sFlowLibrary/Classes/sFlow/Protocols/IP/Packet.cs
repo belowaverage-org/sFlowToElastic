@@ -1,6 +1,4 @@
-﻿using BelowAverage.sFlow.Types.Protocols;
-
-namespace BelowAverage.sFlow.Types.IPPackets
+﻿namespace BelowAverage.sFlow.Protocols.IP
 {
     public class Packet
     {

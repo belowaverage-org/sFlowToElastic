@@ -1,5 +1,5 @@
-﻿using BelowAverage.sFlow.Types;
-using BelowAverage.sFlow.Types.Flow.Samples;
+﻿using BelowAverage.sFlow.Generic;
+using BelowAverage.sFlow.Samples;
 using System;
 
 namespace BelowAverage.sFlow

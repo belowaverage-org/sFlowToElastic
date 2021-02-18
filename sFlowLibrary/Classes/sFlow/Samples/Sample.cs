@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Types.Flow.Samples
+﻿namespace BelowAverage.sFlow.Samples
 {
     public class Sample
     {

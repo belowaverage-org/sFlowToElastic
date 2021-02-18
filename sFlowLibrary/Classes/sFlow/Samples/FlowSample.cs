@@ -1,8 +1,8 @@
-﻿using BelowAverage.sFlow.Types.Flow.Records;
-using BelowAverage.sFlow.Types.Flow.Records.Extended;
+﻿using BelowAverage.sFlow.Samples.Flow.Records;
+using BelowAverage.sFlow.Samples.Flow.Records.Extended;
 using System;
 
-namespace BelowAverage.sFlow.Types.Flow.Samples
+namespace BelowAverage.sFlow.Samples
 {
     public class FlowSample : Sample
     {

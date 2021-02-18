@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BelowAverage.sFlow.Types.Protocols
+namespace BelowAverage.sFlow.Protocols
 {
     public class TCP : Protocol
     {

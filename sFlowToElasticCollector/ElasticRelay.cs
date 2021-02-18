@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using BelowAverage.sFlow;
-using BelowAverage.sFlow.Types.IPPackets;
-using BelowAverage.sFlow.Types.Protocols;
-using BelowAverage.sFlow.Types.Flow.Records;
-using BelowAverage.sFlow.Types.Flow.Records.Extended;
-using BelowAverage.sFlow.Types.Flow.Samples;
+using BelowAverage.sFlow.Samples;
+using BelowAverage.sFlow.Samples.Flow.Records;
+using BelowAverage.sFlow.Protocols;
+using BelowAverage.sFlow.Protocols.IP;
+using BelowAverage.sFlow.Samples.Flow.Records.Extended;
 
 namespace BelowAverage
 {

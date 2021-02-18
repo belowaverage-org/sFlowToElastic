@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Types.Flow.Records.Extended
+﻿namespace BelowAverage.sFlow.Samples.Flow.Records.Extended
 {
     public class SwitchData : Record
     {

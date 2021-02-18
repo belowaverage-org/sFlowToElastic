@@ -1,7 +1,7 @@
 ﻿using System;
-using BelowAverage.sFlow.Types.Protocols;
+using BelowAverage.sFlow.Generic;
 
-namespace BelowAverage.sFlow.Types.IPPackets
+namespace BelowAverage.sFlow.Protocols.IP
 {
     public class IPv4Packet : Packet
     {

@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Types.Protocols
+﻿namespace BelowAverage.sFlow.Protocols
 {
     public class Protocol { }
     public enum ProtocolType : byte

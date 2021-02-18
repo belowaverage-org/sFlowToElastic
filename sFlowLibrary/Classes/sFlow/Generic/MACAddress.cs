@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BelowAverage.sFlow.Types
+namespace BelowAverage.sFlow.Generic
 {
     public class MACAddress
     {

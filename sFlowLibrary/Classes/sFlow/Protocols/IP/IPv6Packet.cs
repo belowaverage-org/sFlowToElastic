@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Types.IPPackets
+﻿namespace BelowAverage.sFlow.Protocols.IP
 {
     class IPv6Packet : Packet
     {
