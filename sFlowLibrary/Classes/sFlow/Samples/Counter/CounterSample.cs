@@ -1,4 +1,4 @@
-﻿namespace BelowAverage.sFlow.Samples
+﻿namespace BelowAverage.sFlow.Samples.Counter
 {
     public class CounterSample : Sample 
     { 

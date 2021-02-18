@@ -11,6 +11,7 @@ using BelowAverage.sFlow.Samples.Flow.Records;
 using BelowAverage.sFlow.Protocols;
 using BelowAverage.sFlow.Protocols.IP;
 using BelowAverage.sFlow.Samples.Flow.Records.Extended;
+using BelowAverage.sFlow.Samples.Flow;
 
 namespace BelowAverage
 {

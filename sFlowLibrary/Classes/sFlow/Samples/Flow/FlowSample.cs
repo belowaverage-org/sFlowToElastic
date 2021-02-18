@@ -2,7 +2,7 @@
 using BelowAverage.sFlow.Samples.Flow.Records.Extended;
 using System;
 
-namespace BelowAverage.sFlow.Samples
+namespace BelowAverage.sFlow.Samples.Flow
 {
     public class FlowSample : Sample
     {
