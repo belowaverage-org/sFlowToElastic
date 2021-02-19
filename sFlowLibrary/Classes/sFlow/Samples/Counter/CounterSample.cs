@@ -14,14 +14,22 @@ namespace BelowAverage.sFlow.Samples.Counter
             {
                 CounterRecord record = new CounterRecord(buffer.AsSpan((int)recordStartIndex, (int)Record.HeaderLengthBytes).ToArray());
                 int recordLength = (int)(record.Length + Record.HeaderLengthBytes);
-                /*if (record.Type == RecordType.asdf)
+                if (record.Type == RecordType.GenericInterface)
                 {
-                    record = new RawPacketHeader(buffer.AsSpan((int)recordStartIndex, recordLength).ToArray());
+                    record = new Records.Generic(buffer.AsSpan((int)recordStartIndex, recordLength).ToArray());
                 }
-                else if (record.Type == RecordType.ExtSwitchData)
+                else if (record.Type == RecordType.EthernetInterface)
                 {
-                    record = new SwitchData(buffer.AsSpan((int)recordStartIndex, recordLength).ToArray());
-                }*/
+                    record = new Ethernet(buffer.AsSpan((int)recordStartIndex, recordLength).ToArray());
+                }
+                else if (record.Type == RecordType.VLAN)
+                {
+                    record = new VLAN(buffer.AsSpan((int)recordStartIndex, recordLength).ToArray());
+                }
+                else if (record.Type == RecordType.ProcessorInformation)
+                {
+                    record = new ProcessorInfo(buffer.AsSpan((int)recordStartIndex, recordLength).ToArray());
+                }
                 recordStartIndex += (uint)recordLength;
                 Records[i] = record;
             }

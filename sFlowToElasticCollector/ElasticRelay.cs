@@ -7,11 +7,15 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using BelowAverage.sFlow;
 using BelowAverage.sFlow.Samples;
-using BelowAverage.sFlow.Samples.Flow.Records;
 using BelowAverage.sFlow.Protocols;
 using BelowAverage.sFlow.Protocols.IP;
-using BelowAverage.sFlow.Samples.Flow.Records.Extended;
 using BelowAverage.sFlow.Samples.Flow;
+using BelowAverage.sFlow.Samples.Flow.Records;
+using BelowAverage.sFlow.Samples.Counter.Records;
+using FlowRecordType = BelowAverage.sFlow.Samples.Flow.Records.RecordType;
+using CounterRecordType = BelowAverage.sFlow.Samples.Counter.Records.RecordType;
+using BelowAverage.sFlow.Samples.Flow.Records.Extended;
+using BelowAverage.sFlow.Samples.Counter;
 
 namespace BelowAverage
 {
@@ -51,7 +55,7 @@ namespace BelowAverage
                     doc.Add("frame_out_interface_discard", flowSample.OutputInterface.DiscardReason.ToString());
                     foreach (FlowRecord record in flowSample.Records)
                     {
-                        if (record.Type == RecordType.RawPacketHeader)
+                        if (record.Type == FlowRecordType.RawPacketHeader)
                         {
                             RawPacketHeader rawPacketHeader = (RawPacketHeader)record;
                             if (rawPacketHeader.HeaderProtocol == HeaderProtocol.Ethernet)
@@ -70,14 +74,6 @@ namespace BelowAverage
                                     doc.Add("protocol_type", packet.ProtocolType.ToString());
                                     ProtocolType = packet.ProtocolType;
                                 }
-                                else if (ethFrame.PacketType == PacketType.IPv6)
-                                {
-                                    //IPv6Packet packet = (IPv6Packet)ethernetFrame.Packet;
-                                }
-                                else if (ethFrame.PacketType == PacketType.ARP)
-                                {
-                                    //Maybe
-                                }
                                 if (ProtocolType == ProtocolType.TCP)
                                 {
                                     TCP TCP = (TCP)ethFrame.Packet.Payload;
@@ -92,11 +88,76 @@ namespace BelowAverage
                                 }
                             }
                         }
-                        else if (record.Type == RecordType.ExtSwitchData)
+                        else if (record.Type == FlowRecordType.ExtSwitchData)
                         {
                             SwitchData switchData = (SwitchData)record;
                             doc.Add("vlan_in", switchData.IncomingVLAN);
                             doc.Add("vlan_out", switchData.OutgoingVLAN);
+                        }
+                    }
+                }
+                else if(sample.Type == SampleType.Counter)
+                {
+                    CounterSample countSample = (CounterSample)sample;
+                    foreach (CounterRecord record in countSample.Records)
+                    {
+                        if (record.Type == CounterRecordType.GenericInterface)
+                        {
+                            Generic gi = (Generic)record;
+                            doc.Add("if_direction", gi.IfDirection.ToString());
+                            doc.Add("if_in_broadcast_pkts", gi.IfInBroadcastPkts);
+                            doc.Add("if_index", gi.IfIndex);
+                            doc.Add("if_in_discards", gi.IfInDiscards);
+                            doc.Add("if_in_errors", gi.IfInErrors);
+                            doc.Add("if_in_multicast_pkts", gi.IfInMulticastPkts);
+                            doc.Add("if_in_octets", gi.IfInOctets);
+                            doc.Add("if_in_unicast_pkts", gi.IfInUcastPkts);
+                            doc.Add("if_in_unknown_protos", gi.IfInUnknownProtos);
+                            doc.Add("if_out_broadcast_pkts", gi.IfOutBroadcastPkts);
+                            doc.Add("if_out_discards", gi.IfOutDiscards);
+                            doc.Add("if_out_errors", gi.IfOutErrors);
+                            doc.Add("if_out_multicast_pkts", gi.IfOutMulticastPkts);
+                            doc.Add("if_out_octets", gi.IfOutOctets);
+                            doc.Add("if_out_unicast_ptks", gi.IfOutUcastPkts);
+                            doc.Add("if_promiscuous_mode", gi.IfPromiscuousMode);
+                            doc.Add("if_speed", gi.IfSpeed);
+                            doc.Add("if_type", gi.IfType);
+                            doc.Add("if_status_up_admin", gi.IfStatus.HasFlag(Generic.IfStatusFlags.IfAdminStatusUp));
+                            doc.Add("if_status_up_operational", gi.IfStatus.HasFlag(Generic.IfStatusFlags.IfOperStatusUp));
+                        }
+                        else if (record.Type == CounterRecordType.EthernetInterface)
+                        {
+                            Ethernet eth = (Ethernet)record;
+                            doc.Add("eth_alignment_errors", eth.AlignmentErrors);
+                            doc.Add("eth_carrier_sense_errors", eth.CarrierSenseErrors);
+                            doc.Add("eth_deferred_transmissions", eth.DeferredTransmissions);
+                            doc.Add("eth_excessive_collisions", eth.ExcessiveCollisions);
+                            doc.Add("eth_fcs_errors", eth.FCSErrors);
+                            doc.Add("eth_frame_too_longs", eth.FrameTooLongs);
+                            doc.Add("eth_mac_recieve_errors", eth.InternalMacReceiveErrors);
+                            doc.Add("eth_mac_transmit_errors", eth.InternalMacTransmitErrors);
+                            doc.Add("eth_late_collisions", eth.LateCollisions);
+                            doc.Add("eth_multiple_collision_frames", eth.MultipleCollisionFrames);
+                            doc.Add("eth_single_collision_frames", eth.SingleCollisionFrames);
+                            doc.Add("eth_sqe_test_errors", eth.SQETestErrors);
+                            doc.Add("eth_symbol_errors", eth.SymbolErrors);
+                        }
+                        else if (record.Type == CounterRecordType.VLAN)
+                        {
+                            VLAN vlan = (VLAN)record;
+                            doc.Add("vlan_multicast_pkts", vlan.MulticastPkts);
+                            doc.Add("vlan_octets", vlan.Octets);
+                            doc.Add("vlan_unicast_pkts", vlan.UCastPkts);
+                            doc.Add("vlan_id", vlan.VlanID);
+                        }
+                        else if (record.Type == CounterRecordType.ProcessorInformation)
+                        {
+                            ProcessorInfo pi = (ProcessorInfo)record;
+                            doc.Add("stats_cpu_percent_1m", pi.Cpu1mPercentage);
+                            doc.Add("stats_cpu_percent", pi.Cpu5mPercentage);
+                            doc.Add("stats_cpu_5s_percent", pi.Cpu5sPercentage);
+                            doc.Add("stats_memory_free", pi.FreeMemory);
+                            doc.Add("stats_memory_total", pi.TotalMemory);
                         }
                     }
                 }
@@ -105,7 +166,7 @@ namespace BelowAverage
             }
             try
             {
-                MemoryStream ms = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(request));
+                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(request));
                 await HC.PostAsync(URI + "/_bulk", new StreamContent(ms)
                 {
                     Headers =
