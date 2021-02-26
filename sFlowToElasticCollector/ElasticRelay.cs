@@ -58,6 +58,7 @@ namespace BelowAverage
                         if (record.Type == FlowRecordType.RawPacketHeader)
                         {
                             RawPacketHeader rawPacketHeader = (RawPacketHeader)record;
+                            doc.Add("frame_length_octets", rawPacketHeader.FrameLength);
                             if (rawPacketHeader.HeaderProtocol == HeaderProtocol.Ethernet)
                             {
                                 EthernetFrame ethFrame = (EthernetFrame)rawPacketHeader.Header;
